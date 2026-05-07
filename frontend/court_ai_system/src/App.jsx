@@ -1,13 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
 
-import Upload from "./components/Upload";
+import UploadPage from "./pages/UploadPage";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
-  return <Upload />;
+
+  const [page, setPage] = useState("upload");
+
+  return (
+    <div>
+
+      <nav className="p-3 bg-dark">
+
+        <button
+          className="btn btn-light me-3"
+          onClick={() => setPage("upload")}
+        >
+          Upload
+        </button>
+
+        <button
+          className="btn btn-warning"
+          onClick={() => setPage("dashboard")}
+        >
+          Dashboard
+        </button>
+
+      </nav>
+
+      {page === "upload" && <UploadPage />}
+
+      {page === "dashboard" && <DashboardPage />}
+
+    </div>
+  );
 }
 
 export default App;

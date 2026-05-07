@@ -8,6 +8,7 @@ from app.services.rag_service import store_embeddings, retrieve_chunks
 from app.services.llm_service import call_llm
 from app.services.query_service import QUESTIONS
 from app.services.prompt_service import build_prompt
+from app.services.action_service import generate_action_plan
 
 router = APIRouter()
 
@@ -47,9 +48,16 @@ async def upload_file(file: UploadFile = File(...)):
 
             answers[q] = response
         print(answers)
+        # Step 4: Generate action plan
+        
+        action_plan = generate_action_plan(answers)
+        
+        print(action_plan)
+
         return {
-            "message": "Processed with RAG",
-            "answers": answers
+            "message": "Processed successfully",
+            "rag_answers": answers,
+            "action_plan": action_plan
         }
 
     except Exception as e:
