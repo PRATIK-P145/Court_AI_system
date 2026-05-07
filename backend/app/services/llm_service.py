@@ -11,7 +11,7 @@ client = OpenAI(
 
 def call_llm(prompt: str):
     response = client.chat.completions.create(
-        model="meta-llama/llama-prompt-guard-2-86m",
+        model="llama-3.3-70b-versatile",
         messages=[
             {"role": "system", "content": "You are a legal AI system that extracts structured data."},
             {"role": "user", "content": prompt}

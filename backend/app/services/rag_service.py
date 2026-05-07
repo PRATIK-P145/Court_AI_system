@@ -34,7 +34,7 @@ def store_embeddings(text, doc_id):
 
 
 # 🔹 Retrieve relevant chunks
-def retrieve_chunks(query, top_k=5):
+def retrieve_chunks(query, top_k=2):
     query_embedding = model.encode([query]).tolist()
 
     results = collection.query(

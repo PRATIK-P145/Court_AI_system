@@ -26,7 +26,10 @@ async def upload_file(file: UploadFile = File(...)):
 
         # Step 1: Extract text
         extracted_text = extract_text(file_path)
-
+        
+        with open("extracted_file.txt", "w") as file:
+            file.write(extracted_text)
+        
         # Step 2: Store in vector DB
         store_embeddings(extracted_text, doc_id=timestamp)
 
@@ -39,11 +42,11 @@ async def upload_file(file: UploadFile = File(...)):
             context = "\n".join(chunks)
 
             prompt = build_prompt(context, q)
-
+            print(prompt)
             response = call_llm(prompt)
 
             answers[q] = response
-
+        print(answers)
         return {
             "message": "Processed with RAG",
             "answers": answers
